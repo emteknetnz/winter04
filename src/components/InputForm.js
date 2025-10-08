@@ -6,7 +6,6 @@ export const fields = [
   { label: 'Current Savings', name: 'currentSavings', type: 'number', min: 0, step: 5000 },
   { label: 'Monthly Contributions', name: 'monthlyContribution', type: 'number', min: 0, step: 100 },
   { label: 'Annual Return Rate (%)', name: 'annualReturnRate', type: 'number', min: 0, max: 100, step: 0.5 },
-  { label: 'Inflation Rate (%)', name: 'inflationRate', type: 'number', min: 0, max: 100, step: 0.5 },
   { label: 'Tax Rate (%)', name: 'taxRate', type: 'number', min: 0, max: 100, step: 0.5 },
 ];
 
@@ -18,7 +17,7 @@ function validate(name, value) {
     return 'Invalid ' + name.replace(/([A-Z])/g, ' $1').toLowerCase();
   }
   if (Number(value) < 0) return name + ' must be positive';
-  if ((name === 'annualReturnRate' || name === 'inflationRate' || name === 'taxRate') && (Number(value) < 0 || Number(value) > 100)) return name + ' must be 0-100';
+  if ((name === 'annualReturnRate' || name === 'taxRate') && (Number(value) < 0 || Number(value) > 100)) return name + ' must be 0-100';
   return '';
 }
 
@@ -32,7 +31,6 @@ export default function InputForm({ onChange }) {
     currentSavings: 50000,
     monthlyContribution: 500,
     annualReturnRate: 6.5,
-    inflationRate: 2.5,
     taxRate: 33,
   };
 

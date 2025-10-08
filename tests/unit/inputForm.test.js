@@ -1,6 +1,6 @@
   it('validates max values for percentage fields', () => {
     render(<InputForm />);
-    ['annualReturnRate', 'inflationRate', 'taxRate'].forEach(name => {
+    ['annualReturnRate', 'taxRate'].forEach(name => {
       const input = screen.getByLabelText(new RegExp(name.replace(/([A-Z])/g, ' $1'), 'i'));
       fireEvent.change(input, { target: { value: '100' } });
       expect(screen.queryByTestId(`error-${name}`)).not.toBeInTheDocument();
@@ -83,7 +83,6 @@ describe('InputForm', () => {
     expect(screen.getByLabelText(/current savings/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/monthly contributions/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/annual return rate/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/inflation rate/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/tax rate/i)).toBeInTheDocument();
   });
 

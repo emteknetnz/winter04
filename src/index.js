@@ -23,48 +23,44 @@ function App() {
 		const handleFormChange = (values) => {
 			setForm(values);
 			// Calculations are triggered automatically on input change
-			const required = [
-				'currentAge', 'retirementAge', 'currentSavings',
-				'monthlyContribution', 'annualReturnRate', 'inflationRate', 'taxRate'
-			];
+				const required = [
+					'currentAge', 'retirementAge', 'currentSavings',
+					'monthlyContribution', 'annualReturnRate', 'taxRate'
+				];
 			if (required.every((k) => values[k] !== undefined && values[k] !== '')) {
-				// Convert percent fields to decimals
-				const params = {
-					...values,
-					annualReturnRate: Number(values.annualReturnRate) / 100,
-					inflationRate: Number(values.inflationRate) / 100,
-					taxRate: Number(values.taxRate) / 100,
-					currentAge: Number(values.currentAge),
-					retirementAge: Number(values.retirementAge),
-					currentSavings: Number(values.currentSavings),
-					monthlyContribution: Number(values.monthlyContribution),
-				};
-				const years = params.retirementAge - params.currentAge;
-				let balance = params.currentSavings;
-				const data = [];
-				for (let year = 0; year < years; year++) {
-					const startingBalance = balance;
-					const contribution = params.monthlyContribution * 12;
-					balance += contribution;
-					const interest = balance * params.annualReturnRate;
-					balance += interest;
-					const inflationAdjustment = balance * params.inflationRate;
-					balance -= inflationAdjustment;
-					const taxPaid = interest * params.taxRate;
-					balance -= taxPaid;
-					const endingBalance = balance;
-					data.push({
-						year: params.currentAge + year + 1,
-						age: params.currentAge + year + 1,
-						startingBalance: Math.round(startingBalance),
-						contribution: Math.round(contribution),
-						interest: Math.round(interest),
-						inflationAdjustment: Math.round(inflationAdjustment),
-						taxPaid: Math.round(taxPaid),
-						endingBalance: Math.round(endingBalance),
-					});
-				}
-				setProjection(data);
+						// Convert percent fields to decimals
+						const params = {
+							...values,
+							annualReturnRate: Number(values.annualReturnRate) / 100,
+							taxRate: Number(values.taxRate) / 100,
+							currentAge: Number(values.currentAge),
+							retirementAge: Number(values.retirementAge),
+							currentSavings: Number(values.currentSavings),
+							monthlyContribution: Number(values.monthlyContribution),
+						};
+						const years = params.retirementAge - params.currentAge;
+						let balance = params.currentSavings;
+						const data = [];
+						for (let year = 0; year < years; year++) {
+							const startingBalance = balance;
+							const contribution = params.monthlyContribution * 12;
+							balance += contribution;
+							const interest = balance * params.annualReturnRate;
+							balance += interest;
+							const taxPaid = interest * params.taxRate;
+							balance -= taxPaid;
+							const endingBalance = balance;
+							data.push({
+								year: params.currentAge + year + 1,
+								age: params.currentAge + year + 1,
+								startingBalance: Math.round(startingBalance),
+								contribution: Math.round(contribution),
+								interest: Math.round(interest),
+								taxPaid: Math.round(taxPaid),
+								endingBalance: Math.round(endingBalance),
+							});
+						}
+						setProjection(data);
 			} else {
 				setProjection([]);
 			}
