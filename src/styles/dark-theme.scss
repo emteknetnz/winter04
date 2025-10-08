@@ -1,0 +1,21 @@
+/* Dark theme SCSS for Retirement Calculator Application */
+body.dark-theme {
+  background: #181a1b;
+  color: #e0e0e0;
+}
+
+input, select, textarea, button {
+  background: #222;
+  color: #e0e0e0;
+  border: 1px solid #444;
+}
+
+.yearly-breakdown-table {
+  background: #222;
+  color: #e0e0e0;
+  border-color: #444;
+}
+
+/* Chart.js uses canvas, so chart colors are set in JS */
+
+/* Add more dark theme overrides as needed for components */

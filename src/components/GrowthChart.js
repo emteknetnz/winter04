@@ -59,7 +59,11 @@ function GrowthChart({ projectionData }) {
     },
   };
 
-  return <Line data={data} options={options} />;
+  return (
+    <div role="region" aria-label="Retirement Savings Growth Chart">
+      <Line data={data} options={options} aria-label="Retirement Savings Growth Chart" />
+    </div>
+  );
 }
 
 GrowthChart.propTypes = {

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
 export const fields = [
-  { label: 'Current Age', name: 'currentAge', type: 'number', min: 0 },
-  { label: 'Retirement Age', name: 'retirementAge', type: 'number', min: 0 },
-  { label: 'Current Savings', name: 'currentSavings', type: 'number', min: 0 },
-  { label: 'Monthly Contributions', name: 'monthlyContribution', type: 'number', min: 0 },
-  { label: 'Annual Return Rate (%)', name: 'annualReturnRate', type: 'number', min: 0, max: 100 },
-  { label: 'Inflation Rate (%)', name: 'inflationRate', type: 'number', min: 0, max: 100 },
-  { label: 'Tax Rate (%)', name: 'taxRate', type: 'number', min: 0, max: 100 },
+  { label: 'Current Age', name: 'currentAge', type: 'number', min: 0, step: 1 },
+  { label: 'Retirement Age', name: 'retirementAge', type: 'number', min: 0, step: 1 },
+  { label: 'Current Savings', name: 'currentSavings', type: 'number', min: 0, step: 5000 },
+  { label: 'Monthly Contributions', name: 'monthlyContribution', type: 'number', min: 0, step: 100 },
+  { label: 'Annual Return Rate (%)', name: 'annualReturnRate', type: 'number', min: 0, max: 100, step: 0.5 },
+  { label: 'Inflation Rate (%)', name: 'inflationRate', type: 'number', min: 0, max: 100, step: 0.5 },
+  { label: 'Tax Rate (%)', name: 'taxRate', type: 'number', min: 0, max: 100, step: 0.5 },
 ];
 
 function validate(name, value) {
@@ -33,7 +33,7 @@ export default function InputForm({ onChange }) {
     monthlyContribution: 500,
     annualReturnRate: 6.5,
     inflationRate: 2.5,
-    taxRate: 20,
+    taxRate: 33,
   };
 
   const fillSampleData = () => {
@@ -56,23 +56,31 @@ export default function InputForm({ onChange }) {
   };
 
   return (
-  <form>
+    <form role="form" aria-label="Retirement Calculator Input Form">
       {fields.map(f => (
         <div key={f.name}>
-          <label htmlFor={f.name}>{f.label}</label>
+          <label htmlFor={f.name} id={`label-${f.name}`}>{f.label}</label>
           <input
             id={f.name}
             name={f.name}
             type={f.type}
             min={f.min}
             max={f.max}
+            step={f.step}
             value={values[f.name] !== undefined ? values[f.name] : ''}
             onChange={handleChange}
-            aria-label={f.label}
+            aria-labelledby={`label-${f.name}`}
+            aria-invalid={!!errors[f.name]}
+            aria-describedby={errors[f.name] ? `error-${f.name}` : undefined}
             inputMode={f.type === 'number' ? 'decimal' : undefined}
           />
           {errors[f.name] && (
-            <span style={{ color: 'red' }} data-testid={`error-${f.name}`}>
+            <span
+              id={`error-${f.name}`}
+              style={{ color: 'red' }}
+              data-testid={`error-${f.name}`}
+              role="alert"
+            >
               {errors[f.name].toLowerCase().includes('invalid') ? `invalid ${f.label.toLowerCase()}` : errors[f.name]}
             </span>
           )}
@@ -88,20 +96,7 @@ export default function InputForm({ onChange }) {
       >
         Fill Sample Data
       </button>
-      <button
-        type="button"
-        onClick={() => {
-          if (Object.values(errors).every(e => !e)) {
-            if (typeof onChange === 'function') onChange(values);
-            if (typeof window !== 'undefined' && typeof window.onCalculate === 'function') window.onCalculate(values);
-          }
-        }}
-        style={{ marginTop: '1em' }}
-        aria-label="Calculate"
-        data-testid="calculate-button"
-      >
-        Calculate
-      </button>
+      {/* Calculate button removed. Calculations now trigger on input change. */}
     </form>
   );
 }

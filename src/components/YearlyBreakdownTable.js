@@ -1,19 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+function formatDollar(value) {
+  return `$${value.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+}
+
 function YearlyBreakdownTable({ projectionData }) {
   return (
-    <table className="yearly-breakdown-table">
+    <table className="yearly-breakdown-table" role="table" aria-label="Yearly Retirement Savings Breakdown">
       <thead>
         <tr>
-          <th>Year</th>
-          <th>Age</th>
-          <th>Starting Balance</th>
-          <th>Contribution</th>
-          <th>Interest</th>
-          <th>Inflation Adj.</th>
-          <th>Tax Paid</th>
-          <th>Ending Balance</th>
+          <th scope="col">Year</th>
+          <th scope="col">Age</th>
+          <th scope="col">Starting Balance</th>
+          <th scope="col">Contribution</th>
+          <th scope="col">Interest</th>
+          <th scope="col">Inflation Adj.</th>
+          <th scope="col">Tax Paid</th>
+          <th scope="col">Ending Balance</th>
         </tr>
       </thead>
       <tbody>
@@ -21,12 +25,12 @@ function YearlyBreakdownTable({ projectionData }) {
           <tr key={row.year}>
             <td>{row.year}</td>
             <td>{row.age}</td>
-            <td>{row.startingBalance.toLocaleString()}</td>
-            <td>{row.contribution.toLocaleString()}</td>
-            <td>{row.interest.toLocaleString()}</td>
-            <td>{row.inflationAdjustment.toLocaleString()}</td>
-            <td>{row.taxPaid.toLocaleString()}</td>
-            <td>{row.endingBalance.toLocaleString()}</td>
+            <td>{formatDollar(row.startingBalance)}</td>
+            <td>{formatDollar(row.contribution)}</td>
+            <td>{formatDollar(row.interest)}</td>
+            <td>{formatDollar(row.inflationAdjustment)}</td>
+            <td>{formatDollar(row.taxPaid)}</td>
+            <td>{formatDollar(row.endingBalance)}</td>
           </tr>
         ))}
       </tbody>
