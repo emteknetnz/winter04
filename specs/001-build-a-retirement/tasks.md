@@ -41,7 +41,9 @@
 
 ## Phase 3: User Story 1 - Input Parameters and Projection (Priority: P1)
 
-### T004: Create Input Form
+
+
+### T004: Create Input Form [X]
 - **Description**: Develop a form for users to input parameters.
 - **Steps**:
   1. Create a React component for the input form.
@@ -49,7 +51,7 @@
   3. Implement real-time validation for each field.
 - **Output**: Functional input form with validation.
 
-### T005: Implement Projection Logic
+### T005: Implement Projection Logic [X]
 - **Description**: Develop the logic to calculate retirement savings projections.
 - **Steps**:
   1. Write a function to calculate projections, adjusting for inflation and tax.
@@ -57,25 +59,80 @@
   3. Write unit tests for the projection logic.
 - **Output**: Projection logic implemented and tested.
 
+### T006: Add hot reload dev server
++ **Description**: Add a dev server the user can view [X]
++ **Steps**:
+  1. Install and configure Webpack Dev Server.
+  2. Update `package.json` to add a `start` script:  
+     ```json
+     "scripts": {
+       "start": "webpack serve --port 9876 --hot"
+     }
+     ```
+  3. Ensure Webpack config enables hot module replacement.
+  4. Document usage: run `npm run start` to launch the dev server on port 9876.
++ **Output**: The user use start a dev server with hot reload.
+
+
 ---
 
 ## Phase 4: User Story 2 - Visualization of Growth (Priority: P2)
 
-### T006: Develop Growth Chart
-- **Description**: Create an interactive growth chart.
-- **Steps**:
+### T006: Develop Growth Chart [X]
+**Description**: Create an interactive growth chart.
+**Steps**:
   1. Use a charting library (e.g., Chart.js) to create the chart.
   2. Bind the chart to the projection data.
   3. Ensure the chart updates dynamically based on user inputs.
-- **Output**: Interactive growth chart.
+**Output**: Interactive growth chart.
 
-### T007: Create Yearly Breakdown Table
-- **Description**: Develop a table to display yearly breakdowns of retirement savings.
-- **Steps**:
+### T007: Create Yearly Breakdown Table [X]
+**Description**: Develop a table to display yearly breakdowns of retirement savings.
+**Steps**:
   1. Create a React component for the table.
   2. Populate the table with projection data.
   3. Ensure the table updates dynamically based on user inputs.
-- **Output**: Yearly breakdown table.
+**Output**: Yearly breakdown table.
+
+### T008: Add calculate button [X]
+- **Description**: Add a button to trigger retirement projection calculations.
+- **Steps**:
+  1. Create a React button component labeled "Calculate".
+  2. Connect the button to the projection logic so it runs when clicked.
+  3. Disable the button if input validation fails.
+  4. Show a loading indicator while calculations are running.
+- **Output**: Calculate button that triggers projections and provides user feedback.
+
+### T008b: Improve Test Coverage [X]
+- **Description**: Increase test coverage to meet the 80% threshold for statements, branches, functions, and lines.
+- **Steps**:
+  1. Identify untested code paths, especially in InputForm.js and other low-coverage files.
+  2. Write additional unit and integration tests to cover missing branches, statements, and functions.
+  3. Run tests and verify coverage meets or exceeds 80% for all metrics.
+- **Output**: Test suite passes with at least 80% coverage for statements, branches, functions, and lines.
+
+### T009: Add "Fill Sample Data" Button [X]
+- **Description**: Add a button to populate the input form with sample data.
+- **Steps**:
+  1. Create a button labelled "Fill Sample Data".
+  2. Implement logic to fill all input fields with realistic sample values.
+  3. Add a tooltip explaining the purpose of the button.
+- **Output**: Button that quickly fills the form with sample data for testing.
+
+### T010: Step Values for Numeric Inputs
+- **Description**: Set appropriate step values for all numeric input fields in the form to improve usability.
+- **Steps**:
+  1. Update the input components to use the specified step values.
+    - **Current Age**: Step = 1 year  
+    - **Retirement Age**: Step = 1 year  
+    - **Current Savings**: Step = $5,000  
+    - **Monthly Contributions**: Step = $100  
+    - **Annual Return Rate**: Step = 0.5%  
+    - **Inflation Rate**: Step = 0.5%  
+    - **Tax Rate**: Step = 0.5%  
+  2. Ensure step values are reflected in the UI and validation logic.
+  3. Test each input to confirm correct increment/decrement behavior.
+- **Output**: Numeric inputs with user-friendly step values.
 
 ---
 
