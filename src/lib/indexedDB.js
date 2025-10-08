@@ -11,7 +11,10 @@ export function openDB() {
     request.onupgradeneeded = function (event) {
       const db = event.target.result;
       if (!db.objectStoreNames.contains(STORE_NAME)) {
-        db.createObjectStore(STORE_NAME, { keyPath: 'id', autoIncrement: true });
+        db.createObjectStore(STORE_NAME, {
+          keyPath: 'id',
+          autoIncrement: true,
+        });
       }
     };
     request.onsuccess = function (event) {
@@ -24,7 +27,7 @@ export function openDB() {
 }
 
 export function saveUserData(data) {
-  return openDB().then(db => {
+  return openDB().then((db) => {
     return new Promise((resolve, reject) => {
       const tx = db.transaction(STORE_NAME, 'readwrite');
       const store = tx.objectStore(STORE_NAME);
@@ -36,7 +39,7 @@ export function saveUserData(data) {
 }
 
 export function getAllUserData() {
-  return openDB().then(db => {
+  return openDB().then((db) => {
     return new Promise((resolve, reject) => {
       const tx = db.transaction(STORE_NAME, 'readonly');
       const store = tx.objectStore(STORE_NAME);

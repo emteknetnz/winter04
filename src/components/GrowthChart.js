@@ -13,7 +13,15 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 function GrowthChart({ projectionData }) {
   // projectionData: [{ year, value }, ...]
@@ -61,7 +69,11 @@ function GrowthChart({ projectionData }) {
 
   return (
     <div role="region" aria-label="Retirement Savings Growth Chart">
-      <Line data={data} options={options} aria-label="Retirement Savings Growth Chart" />
+      <Line
+        data={data}
+        options={options}
+        aria-label="Retirement Savings Growth Chart"
+      />
     </div>
   );
 }

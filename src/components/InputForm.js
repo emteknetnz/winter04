@@ -2,11 +2,43 @@ import React, { useState } from 'react';
 
 export const fields = [
   { label: 'Current Age', name: 'currentAge', type: 'number', min: 0, step: 1 },
-  { label: 'Retirement Age', name: 'retirementAge', type: 'number', min: 0, step: 1 },
-  { label: 'Current Savings', name: 'currentSavings', type: 'number', min: 0, step: 5000 },
-  { label: 'Monthly Contributions', name: 'monthlyContribution', type: 'number', min: 0, step: 100 },
-  { label: 'Annual Return Rate (%)', name: 'annualReturnRate', type: 'number', min: 0, max: 100, step: 0.5 },
-  { label: 'Tax Rate (%)', name: 'taxRate', type: 'number', min: 0, max: 100, step: 0.5 },
+  {
+    label: 'Retirement Age',
+    name: 'retirementAge',
+    type: 'number',
+    min: 0,
+    step: 1,
+  },
+  {
+    label: 'Current Savings',
+    name: 'currentSavings',
+    type: 'number',
+    min: 0,
+    step: 5000,
+  },
+  {
+    label: 'Monthly Contributions',
+    name: 'monthlyContribution',
+    type: 'number',
+    min: 0,
+    step: 100,
+  },
+  {
+    label: 'Annual Return Rate (%)',
+    name: 'annualReturnRate',
+    type: 'number',
+    min: 0,
+    max: 100,
+    step: 0.5,
+  },
+  {
+    label: 'Tax Rate (%)',
+    name: 'taxRate',
+    type: 'number',
+    min: 0,
+    max: 100,
+    step: 0.5,
+  },
 ];
 
 function validate(name, value) {
@@ -17,7 +49,11 @@ function validate(name, value) {
     return 'Invalid ' + name.replace(/([A-Z])/g, ' $1').toLowerCase();
   }
   if (Number(value) < 0) return name + ' must be positive';
-  if ((name === 'annualReturnRate' || name === 'taxRate') && (Number(value) < 0 || Number(value) > 100)) return name + ' must be 0-100';
+  if (
+    (name === 'annualReturnRate' || name === 'taxRate') &&
+    (Number(value) < 0 || Number(value) > 100)
+  )
+    return name + ' must be 0-100';
   return '';
 }
 
@@ -55,9 +91,11 @@ export default function InputForm({ onChange }) {
 
   return (
     <form role="form" aria-label="Retirement Calculator Input Form">
-      {fields.map(f => (
+      {fields.map((f) => (
         <div key={f.name}>
-          <label htmlFor={f.name} id={`label-${f.name}`}>{f.label}</label>
+          <label htmlFor={f.name} id={`label-${f.name}`}>
+            {f.label}
+          </label>
           <input
             id={f.name}
             name={f.name}
@@ -79,7 +117,9 @@ export default function InputForm({ onChange }) {
               data-testid={`error-${f.name}`}
               role="alert"
             >
-              {errors[f.name].toLowerCase().includes('invalid') ? `invalid ${f.label.toLowerCase()}` : errors[f.name]}
+              {errors[f.name].toLowerCase().includes('invalid')
+                ? `invalid ${f.label.toLowerCase()}`
+                : errors[f.name]}
             </span>
           )}
         </div>

@@ -5,13 +5,13 @@
 **Status**: Draft  
 **Input**: User description: "Build a retirement calculator application that helps users project their retirement savings and visualize growth over time. Users can input parameters such as current age, retirement age, current savings, monthly contributions, annual return rate, inflation rate, and tax rate. The application provides real-time validation, displays results in a table with yearly breakdowns, and includes an interactive growth chart. It adjusts calculations for inflation and tax, and calculates the annualized real return. The interface is accessible, styled with a dark theme, and includes sample data autofill for quick testing."
 
-## User Scenarios & Testing *(mandatory)*
+## User Scenarios & Testing _(mandatory)_
 
 <!--
   IMPORTANT: User stories should be PRIORITIZED as user journeys ordered by importance.
   Each user story/journey must be INDEPENDENTLY TESTABLE - meaning if you implement just ONE of them,
   you should still have a viable MVP (Minimum Viable Product) that delivers value.
-  
+
   Assign priorities (P1, P2, P3, etc.) to each story, where P1 is the most critical.
   Think of each story as a standalone slice of functionality that can be:
   - Developed independently
@@ -72,7 +72,7 @@ The interface is accessible and styled with a dark theme.
 - How does the system handle missing or incomplete inputs?
   - The system will prompt users to complete missing fields before proceeding.
 
-## Requirements *(mandatory)*
+## Requirements _(mandatory)_
 
 <!--
   ACTION REQUIRED: The content in this section represents placeholders.
@@ -88,12 +88,12 @@ The interface is accessible and styled with a dark theme.
 - **FR-005**: System MUST provide an accessible interface styled with a dark theme.
 - **FR-006**: System MUST include a sample data autofill feature for quick testing, providing a button to autofill fields on demand.
 
-### Key Entities *(include if feature involves data)*
+### Key Entities _(include if feature involves data)_
 
 - **User Input**: Represents parameters such as age, savings, contributions, and rates.
 - **Projection Data**: Represents calculated yearly savings, adjusted for inflation and tax.
 
-## Success Criteria *(mandatory)*
+## Success Criteria _(mandatory)_
 
 <!--
   ACTION REQUIRED: Define measurable success criteria.

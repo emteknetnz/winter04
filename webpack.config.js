@@ -1,4 +1,3 @@
-
 const path = require('path');
 
 module.exports = {
@@ -19,11 +18,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader',
-        ],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
   },
@@ -32,9 +27,9 @@ module.exports = {
   },
   devtool: 'source-map',
   devServer: {
-     static: path.join(__dirname, 'dist'),
-     compress: true,
-     port: 9876,
-     hot: true,
+    static: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 9876,
+    hot: true,
   },
 };

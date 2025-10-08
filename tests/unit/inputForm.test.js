@@ -1,53 +1,65 @@
-  it('validates max values for percentage fields', () => {
-    render(<InputForm />);
-    ['annualReturnRate', 'taxRate'].forEach(name => {
-      const input = screen.getByLabelText(new RegExp(name.replace(/([A-Z])/g, ' $1'), 'i'));
-      fireEvent.change(input, { target: { value: '100' } });
-      expect(screen.queryByTestId(`error-${name}`)).not.toBeInTheDocument();
-      fireEvent.change(input, { target: { value: '101' } });
-      expect(screen.getByTestId(`error-${name}`)).toHaveTextContent(/must be 0-100/i);
-    });
+it('validates max values for percentage fields', () => {
+  render(<InputForm />);
+  ['annualReturnRate', 'taxRate'].forEach((name) => {
+    const input = screen.getByLabelText(
+      new RegExp(name.replace(/([A-Z])/g, ' $1'), 'i')
+    );
+    fireEvent.change(input, { target: { value: '100' } });
+    expect(screen.queryByTestId(`error-${name}`)).not.toBeInTheDocument();
+    fireEvent.change(input, { target: { value: '101' } });
+    expect(screen.getByTestId(`error-${name}`)).toHaveTextContent(
+      /must be 0-100/i
+    );
   });
+});
 
-  it('validates zero and large values for savings and contributions', () => {
-    render(<InputForm />);
-    const savingsInput = screen.getByLabelText(/current savings/i);
-    fireEvent.change(savingsInput, { target: { value: '0' } });
-    expect(screen.queryByTestId('error-currentSavings')).not.toBeInTheDocument();
-    fireEvent.change(savingsInput, { target: { value: '1000000' } });
-    expect(screen.queryByTestId('error-currentSavings')).not.toBeInTheDocument();
-    const contribInput = screen.getByLabelText(/monthly contributions/i);
-    fireEvent.change(contribInput, { target: { value: '0' } });
-    expect(screen.queryByTestId('error-monthlyContribution')).not.toBeInTheDocument();
-    fireEvent.change(contribInput, { target: { value: '10000' } });
-    expect(screen.queryByTestId('error-monthlyContribution')).not.toBeInTheDocument();
-  });
+it('validates zero and large values for savings and contributions', () => {
+  render(<InputForm />);
+  const savingsInput = screen.getByLabelText(/current savings/i);
+  fireEvent.change(savingsInput, { target: { value: '0' } });
+  expect(screen.queryByTestId('error-currentSavings')).not.toBeInTheDocument();
+  fireEvent.change(savingsInput, { target: { value: '1000000' } });
+  expect(screen.queryByTestId('error-currentSavings')).not.toBeInTheDocument();
+  const contribInput = screen.getByLabelText(/monthly contributions/i);
+  fireEvent.change(contribInput, { target: { value: '0' } });
+  expect(
+    screen.queryByTestId('error-monthlyContribution')
+  ).not.toBeInTheDocument();
+  fireEvent.change(contribInput, { target: { value: '10000' } });
+  expect(
+    screen.queryByTestId('error-monthlyContribution')
+  ).not.toBeInTheDocument();
+});
 
-  it('fills sample data and validates all fields', () => {
-    render(<InputForm />);
-    const button = screen.getByTestId('fill-sample-data-button');
-    fireEvent.click(button);
-    fields.forEach(f => {
-      const input = screen.getByLabelText(new RegExp(f.label.replace(' (%)', ''), 'i'));
-      expect(input.value).not.toBe('');
-      const errorSpan = screen.queryByTestId(`error-${f.name}`);
-      if (errorSpan) {
-        expect(errorSpan.textContent).not.toMatch(/invalid/i);
-      }
-    });
+it('fills sample data and validates all fields', () => {
+  render(<InputForm />);
+  const button = screen.getByTestId('fill-sample-data-button');
+  fireEvent.click(button);
+  fields.forEach((f) => {
+    const input = screen.getByLabelText(
+      new RegExp(f.label.replace(' (%)', ''), 'i')
+    );
+    expect(input.value).not.toBe('');
+    const errorSpan = screen.queryByTestId(`error-${f.name}`);
+    if (errorSpan) {
+      expect(errorSpan.textContent).not.toMatch(/invalid/i);
+    }
   });
+});
 
-  it('shows errors for all fields when invalid', () => {
-    render(<InputForm />);
-    fields.forEach(f => {
-      const input = screen.getByLabelText(new RegExp(f.label.replace(' (%)', ''), 'i'));
-      fireEvent.change(input, { target: { value: '' } });
-      const errorSpan = screen.queryByTestId(`error-${f.name}`);
-      if (errorSpan) {
-        expect(errorSpan.textContent).toMatch(/invalid/i);
-      }
-    });
+it('shows errors for all fields when invalid', () => {
+  render(<InputForm />);
+  fields.forEach((f) => {
+    const input = screen.getByLabelText(
+      new RegExp(f.label.replace(' (%)', ''), 'i')
+    );
+    fireEvent.change(input, { target: { value: '' } });
+    const errorSpan = screen.queryByTestId(`error-${f.name}`);
+    if (errorSpan) {
+      expect(errorSpan.textContent).toMatch(/invalid/i);
+    }
   });
+});
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import InputForm, { fields } from '../../src/components/InputForm';
@@ -55,8 +67,10 @@ import InputForm, { fields } from '../../src/components/InputForm';
 describe('InputForm', () => {
   it('uses correct step values for numeric inputs', () => {
     render(<InputForm />);
-    fields.forEach(f => {
-      const input = screen.getByLabelText(new RegExp(f.label.replace(' (%)', ''), 'i'));
+    fields.forEach((f) => {
+      const input = screen.getByLabelText(
+        new RegExp(f.label.replace(' (%)', ''), 'i')
+      );
       if (f.step !== undefined) {
         expect(input).toHaveAttribute('step', f.step.toString());
       }
@@ -64,8 +78,10 @@ describe('InputForm', () => {
   });
   it('increments and decrements values according to step', () => {
     render(<InputForm />);
-    fields.forEach(f => {
-      const input = screen.getByLabelText(new RegExp(f.label.replace(' (%)', ''), 'i'));
+    fields.forEach((f) => {
+      const input = screen.getByLabelText(
+        new RegExp(f.label.replace(' (%)', ''), 'i')
+      );
       if (f.step !== undefined) {
         // Simulate increment
         fireEvent.change(input, { target: { value: f.step } });
@@ -92,7 +108,6 @@ describe('InputForm', () => {
     fireEvent.change(ageInput, { target: { value: '-1' } });
     expect(screen.getByText(/must be positive/i)).toBeInTheDocument();
   });
-
 
   it('shows error for empty input', () => {
     render(<InputForm />);
@@ -122,15 +137,17 @@ describe('InputForm', () => {
     render(<InputForm />);
     const returnInput = screen.getByLabelText(/annual return rate/i);
     fireEvent.change(returnInput, { target: { value: '101' } });
-    expect(screen.getByTestId('error-annualReturnRate')).toHaveTextContent(/must be 0-100/i);
+    expect(screen.getByTestId('error-annualReturnRate')).toHaveTextContent(
+      /must be 0-100/i
+    );
   });
 
   it('disables calculate button if there are errors', () => {
-  render(<InputForm />);
-  const ageInput = screen.getByLabelText(/current age/i);
-  fireEvent.change(ageInput, { target: { value: '-1' } });
-  // Should show error for invalid age
-  expect(screen.getByTestId('error-currentAge')).toBeInTheDocument();
+    render(<InputForm />);
+    const ageInput = screen.getByLabelText(/current age/i);
+    fireEvent.change(ageInput, { target: { value: '-1' } });
+    // Should show error for invalid age
+    expect(screen.getByTestId('error-currentAge')).toBeInTheDocument();
   });
 
   it('calls onChange and window.onCalculate when valid', () => {
@@ -138,15 +155,19 @@ describe('InputForm', () => {
     window.onCalculate = jest.fn();
     render(<InputForm onChange={onChange} />);
     // Fill all fields with valid values
-    fields.forEach(f => {
+    fields.forEach((f) => {
       let label = f.label;
       if (label.includes('(%)')) label = label.replace(' (%)', '');
       const input = screen.getByLabelText(new RegExp(label, 'i'));
-      fireEvent.change(input, { target: { value: f.min !== undefined ? f.min + 1 : 1 } });
+      fireEvent.change(input, {
+        target: { value: f.min !== undefined ? f.min + 1 : 1 },
+      });
     });
     // Also fill percentage fields
-    ['annualReturnRate', 'inflationRate', 'taxRate'].forEach(name => {
-      const input = screen.getByLabelText(new RegExp(name.replace(/([A-Z])/g, ' $1'), 'i'));
+    ['annualReturnRate', 'inflationRate', 'taxRate'].forEach((name) => {
+      const input = screen.getByLabelText(
+        new RegExp(name.replace(/([A-Z])/g, ' $1'), 'i')
+      );
       fireEvent.change(input, { target: { value: '10' } });
     });
     // Calculation should trigger on input change
