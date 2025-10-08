@@ -1,0 +1,17 @@
+/* Base SCSS file following BEM conventions */
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  background: #f4f4f4;
+  color: #222;
+}
+
+// BEM example
+.block {
+  &__element {
+    // styles
+  }
+  &--modifier {
+    // styles
+  }
+}

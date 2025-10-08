@@ -8,7 +8,7 @@
 
 ## Phase 1: Setup Tasks
 
-### T001: Initialize Project
+### T001: Initialize Project [X]
 - **Description**: Set up the project structure and install dependencies.
 - **Steps**:
   1. Create the project directory structure as outlined in `plan.md`.
@@ -17,7 +17,7 @@
   4. Set up Prettier and Airbnb's JavaScript style guide.
 - **Output**: Basic project structure with dependencies installed.
 
-### T002: Configure Testing Framework
+### T002: Configure Testing Framework [X]
 - **Description**: Set up Jest and React Testing Library.
 - **Steps**:
   1. Install Jest and React Testing Library.
@@ -30,12 +30,12 @@
 ## Phase 2: Foundational Tasks
 
 ### T003: Implement Core Infrastructure
-- **Description**: Set up foundational infrastructure for the application.
-- **Steps**:
+**Description**: Set up foundational infrastructure for the application. [X]
+**Steps**:
   1. Configure Webpack for bundling.
   2. Set up IndexedDB for local storage.
   3. Create a base SCSS file following BEM conventions.
-- **Output**: Core infrastructure ready for development.
+**Output**: Core infrastructure ready for development.
 
 ---
 
